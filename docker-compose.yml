@@ -1,7 +1,7 @@
 version: "4.0"
 services:
     zabbix-proxy-v4:
-        image: dockerglobalcare/globalcare:5.5
+        image: dockerglobalcare/globalcare:5.6
         container_name: proxyzbx5.5
         hostname: proxyzbx5
         ports:
