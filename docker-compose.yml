@@ -1,9 +1,9 @@
 version: "4.0"
 services:
     zabbix-proxy-v4:
-        image: dockerglobalcare/zbx-prx-6.4.10:1.0
-        container_name: proxyzbx6.4
-        hostname: proxyzbx6
+        image: dockerglobalcare/zbx-srv-5.0.42:v2
+        container_name: proxyzbx5.0
+        hostname: proxyzbx5
         ports:
             - $IP:$ZBX_SERVER_PORT:$ZBX_SERVER_PORT
         #cap_add: ['NET_ADMIN']
