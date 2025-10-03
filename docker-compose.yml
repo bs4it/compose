@@ -1,14 +1,11 @@
 version: "4.0"
 services:
-    zabbix-proxy-v4:
-        image: dockerglobalcare/globalcare:5.6
-        container_name: proxyzbx5.6
-        hostname: proxyzbx5.0
+    zabbix-proxy-v7:
+        image: dockerglobalcare/zbx-prx-7.0.2:v4
+        container_name: proxy7
+        hostname: proxyzbx7.0
         ports:
             - $IP:10051:10051
-        #cap_add: ['NET_ADMIN']
-        #devices:
-            #- /dev/net/tun
         environment:
             - ZBX_HOSTNAME=$ZBX_HOSTNAME
             - ZBX_SERVER_HOST=$ZBX_SERVER_HOST
@@ -33,27 +30,26 @@ services:
             - ZBX_TLSCONNECT=psk
             - ZBX_TLSPSKIDENTITY=$ZBX_HOSTNAME
             - ZBX_TLSPSKFILE=tls.psk
-            - ZBX_SERVER_PORT=$ZBX_SERVER_PORT
             - ZBX_ENABLEREMOTECOMMANDS=1
-            #- ZBX_DATASENDERFREQUENCY=$ZBX_DATASENDERFREQUENCY
-            #- ZBX_STARTPREPROCESSORS=$ZBX_STARTPREPROCESSORS
-            #- ZBX_IPMIPOLLERS=$ZBX_IPMIPOLLERS
-            #- ZBX_STARTDISCOVERERS=$ZBX_STARTDISCOVERERS
-            #- ZBX_STARTHISTORYPOLLERS=$ZBX_STARTHISTORYPOLLERS
-            #- ZBX_STARTHTTPPOLLERS=$ZBX_STARTHTTPPOLLERS
-            #- ZBX_STARTODBCPOLLERS=$ZBX_STARTODBCPOLLERS
-            #- ZBX_JAVAGATEWAY=zabbix-java-gateway
-            #- ZBX_JAVAGATEWAYPORT=10052
-            #- ZBX_STARTJAVAPOLLERS=$ZBX_STARTJAVAPOLLERS
-            #- ZBX_ENABLE_SNMP_TRAPS=$ZBX_ENABLE_SNMP_TRAPS
-            #- ZBX_LISTENBACKLOG=$ZBX_LISTENBACKLOG
-            #- ZBX_HOUSEKEEPINGFREQUENCY=$ZBX_HOUSEKEEPINGFREQUENCY
-            #- ZBX_STARTDBSYNCERS=$ZBX_STARTDBSYNCERS
-            #- ZBX_TRAPPERTIMEOUT=$ZBX_TRAPPERTIMEOUT
-            #- ZBX_UNREACHABLEPERIOD=$ZBX_UNREACHABLEPERIOD
-            #- ZBX_UNAVAILABLEDELAY=$ZBX_UNAVAILABLEDELAY
-            #- ZBX_UNREACHABLEDELAY=$ZBX_UNREACHABLEDELAY
-            #- ZBX_LOGSLOWQUERIES=$ZBX_LOGSLOWQUERIES
+            - ZBX_DATASENDERFREQUENCY=$ZBX_DATASENDERFREQUENCY
+            - ZBX_STARTPREPROCESSORS=$ZBX_STARTPREPROCESSORS
+            - ZBX_IPMIPOLLERS=$ZBX_IPMIPOLLERS
+            - ZBX_STARTDISCOVERERS=$ZBX_STARTDISCOVERERS
+            - ZBX_STARTHISTORYPOLLERS=$ZBX_STARTHISTORYPOLLERS
+            - ZBX_STARTHTTPPOLLERS=$ZBX_STARTHTTPPOLLERS
+            - ZBX_STARTODBCPOLLERS=$ZBX_STARTODBCPOLLERS
+            - ZBX_JAVAGATEWAY=zabbix-java-gateway
+            - ZBX_JAVAGATEWAYPORT=10052
+            - ZBX_STARTJAVAPOLLERS=$ZBX_STARTJAVAPOLLERS
+            - ZBX_ENABLE_SNMP_TRAPS=$ZBX_ENABLE_SNMP_TRAPS
+            - ZBX_LISTENBACKLOG=$ZBX_LISTENBACKLOG
+            - ZBX_HOUSEKEEPINGFREQUENCY=$ZBX_HOUSEKEEPINGFREQUENCY
+            - ZBX_STARTDBSYNCERS=$ZBX_STARTDBSYNCERS
+            - ZBX_TRAPPERTIMEOUT=$ZBX_TRAPPERTIMEOUT
+            - ZBX_UNREACHABLEPERIOD=$ZBX_UNREACHABLEPERIOD
+            - ZBX_UNAVAILABLEDELAY=$ZBX_UNAVAILABLEDELAY
+            - ZBX_UNREACHABLEDELAY=$ZBX_UNREACHABLEDELAY
+            - ZBX_LOGSLOWQUERIES=$ZBX_LOGSLOWQUERIES
             
         volumes:
             - /opt/bs4it/zabbix-proxy/scripts/externalscripts:/usr/lib/zabbix/externalscripts
@@ -65,6 +61,7 @@ services:
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
             - /etc/hosts:/etc/hosts
+            #- /opt/bs4it/zabbix-proxy/scripts/alertscripts/openssl.cnf:/etc/ssl/openssl.cnf # Utilizar somente em servidores com SQL-2008 
 #            - /etc/resolv.conf:/etc/resolv.conf
         restart: always
         networks:
@@ -76,3 +73,4 @@ networks:
       driver: default
       config:
         - subnet: $IP_SUBNET
+# teste
